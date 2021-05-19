@@ -14,7 +14,7 @@ jobs:
           cd CxConsolePlugin
           chmod +x runCxConsole.sh
           pwd
-          ./runCxConsole.sh Scan -CxServer "https://cxprivatecloud.checkmarx.net/" -TrustedCertificates -CxUser cassio -CxPassword Putaria@67 -LocationType "GIT" -Projectname "/CxServer/SP/EMEA/LATAM/nova-8.com - 55/Damm Vulnerable dotNet Web Application" -LocationURL "https://github.com/cassiodeveloper/Damm-Vulnerable-dotNet-Web-Application.git" -LocationBranch circleci-project-setup   -Comment "Build Id : $CI_PIPELINE_ID" -Preset "Checkmarx Default" -ForceScan
+          ./runCxConsole.sh Scan -CxServer "https://cxprivatecloud.checkmarx.net/" -TrustedCertificates -CxUser cassio -CxPassword Putaria@67 -LocationType "folder" -Projectname "/CxServer/SP/EMEA/LATAM/nova-8.com - 55/Damm Vulnerable dotNet Web Application" -LocationPath "/home/circleci/project"   -Comment "Build Id : $CI_PIPELINE_ID" -Preset "Checkmarx Default" -ForceScan
 workflows:
   sample: 
     jobs:
