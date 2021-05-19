@@ -17,6 +17,8 @@ jobs:
     docker:
       - image: microsoft/dotnet:latest
     steps:
+      - run: apt-get install -y sudo # https://discuss.circleci.com/t/sudo-command-not-found/14208/4
+      - run: ls -al /bin/sh && sudo rm /bin/sh && sudo ln -s /bin/bash /bin/sh && ls -al /bin/sh
       - run: |
           sudo rm /etc/apt/sources.list
           echo "deb http://archive.debian.org/debian/ jessie-backports main" | sudo tee -a /etc/apt/sources.list
