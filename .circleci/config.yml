@@ -17,7 +17,7 @@ jobs:
     docker:
       - image: bash
       - image: microsoft/dotnet:latest
-      - image: gradle:jdk8
+      - image: circleci/openjdk:9.0.4-12
     steps:
       - checkout
       - run: java --version
