@@ -12,7 +12,7 @@ jobs:
           unzip CxConsolePlugin-1.1.5.zip -d CxConsolePlugin
           cd CxConsolePlugin
           chmod +x runCxConsole.sh
-          ./runCxConsole.sh Scan -CxServer "https://cxprivatecloud.checkmarx.net/" -TrustedCertificates enable -CxUser cassio -CxPassword Putaria@67 -LocationPath "folder" -Projectname "/CxServer/SP/EMEA/LATAM/nova-8.com - 55/Damm Vulnerable dotNet Web Application" -LocationPath "${PROJECT_ENV_VAR}"  -Comment "Build Id : $CI_PIPELINE_ID" -Preset "Checkmarx Default" -ForceScan
+          ./runCxConsole.sh Scan -CxServer "https://cxprivatecloud.checkmarx.net/" -TrustedCertificates -CxUser cassio -CxPassword Putaria@67 -LocationPath "folder" -Projectname "/CxServer/SP/EMEA/LATAM/nova-8.com - 55/Damm Vulnerable dotNet Web Application" -LocationPath "${PROJECT_ENV_VAR}"  -Comment "Build Id : $CI_PIPELINE_ID" -Preset "Checkmarx Default" -ForceScan
 workflows:
   sample: 
     jobs:
