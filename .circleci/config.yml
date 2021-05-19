@@ -26,7 +26,7 @@ jobs:
           apt-get update
       - run:
           name: Install unzip
-          command: apt-get install unzip
+          command: apt-get install zip -y
       - run:
           command: |
             echo "Starting SAST scan"
