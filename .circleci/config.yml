@@ -6,6 +6,7 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
+      - run: apt-get install -y git
       - run: |
           wget https://download.checkmarx.com/9.3.0GA/Plugins/CxConsolePlugin-1.1.5.zip
           mkdir CxConsolePlugin
