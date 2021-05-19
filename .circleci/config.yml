@@ -28,7 +28,7 @@ jobs:
             export PATH=$PATH:$CI_PROJECT_DIR/CxConsolePlugin
             chmod +x runCxConsole.sh
             ls
-            runCxConsole.sh Scan -CxServer https://cxprivatecloud.checkmarx.net -TrustedCertificates -CxUser cassio -CxPassword Putaria@67 -Projectname "CxServer\SP\EMEA\LATAM\nova-8.com - 55\Damm Vulnerable dotNet Web Application" -LocationType "folder" -LocationPath "./project" -Incremental -Comment "From CircleCI" -Preset "Checkmarx Default" -LocationPathExclude "CxConsolePlugin,.idea,db,docs,scripts,test" -LocationFilesExclude ".dockerignore"
+            sh ./runCxConsole.sh Scan -CxServer https://cxprivatecloud.checkmarx.net -TrustedCertificates -CxUser cassio -CxPassword Putaria@67 -Projectname "CxServer\SP\EMEA\LATAM\nova-8.com - 55\Damm Vulnerable dotNet Web Application" -LocationType "folder" -LocationPath "./project" -Incremental -Comment "From CircleCI" -Preset "Checkmarx Default" -LocationPathExclude "CxConsolePlugin,.idea,db,docs,scripts,test" -LocationFilesExclude ".dockerignore"
 
 workflows:
   # Below is the definition of your workflow.
