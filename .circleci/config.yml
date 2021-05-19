@@ -10,8 +10,6 @@ jobs:
     # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
     docker:
       - image: microsoft/dotnet:latest
-      - image: circleci/openjdk:9.0.4-12
-      - image: circleci/openjdk:11.0.3-jdk-stretch
     steps:
       # Checkout the code as the first step.
       - checkout
@@ -19,8 +17,7 @@ jobs:
     docker:
       - image: bash
       - image: microsoft/dotnet:latest
-      - image: circleci/openjdk:9.0.4-12
-      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: gradle:jdk8
     steps:
       - checkout
       - run:
