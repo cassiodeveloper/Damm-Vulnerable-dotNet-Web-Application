@@ -4,7 +4,7 @@ version: 2.1
 
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build-and-test:  
+  build:  
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
@@ -12,7 +12,22 @@ jobs:
       - image: microsoft/dotnet:latest
     steps:
       # Checkout the code as the first step.
-      - checkout            
+      - checkout
+  checkmarx:
+    docker:
+      - image: gradle:jdk8
+    steps:
+      - run:
+          command: |
+            echo "Starting SAST scan"
+            mkdir -p CxConsolePlugin 
+            cd CxConsolePlugin 
+            wget https://download.checkmarx.com/9.0.0/Plugins/CxConsolePlugin-2021.1.1.zip
+            unzip CxConsolePlugin-2021.1.1.zip
+            export PATH=$PATH:$CI_PROJECT_DIR/CxConsolePlugin
+            chmod +x runCxConsole.sh
+            ls
+            ./runCxConsole.sh Scan -CxServer https://cxprivatecloud.checkmarx.net -TrustedCertificates -CxToken 9aabd200d238011ae1735b9a2601e294ae381d611fcd46c39d30818c482e9199 -Projectname "CxServer\SP\Partners\Nova8\TesteCLIAlmir" -LocationType "folder" -LocationPath "$CI_PROJECT_DIR" -Incremental -Comment "Build Id : $CI_PIPELINE_ID" -Preset "Checkmarx Default" -LocationPathExclude "CxConsolePlugin,.idea,db,docs,scripts," -LocationFilesExclude ".dockerignore"
 
 workflows:
   # Below is the definition of your workflow.
@@ -21,4 +36,5 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   sample: 
     jobs:
-      - build-and-test
+      - build
+      - checkmarx
