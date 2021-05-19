@@ -1,26 +1,19 @@
 version: 2.1
 
 jobs:
-  build:  
+  build-and-test:  
     docker:
-      - image: circleci/build-tools@2.9.1
+      - image: cimg/openjdk:11.0
     steps:
       - checkout
-      - run:
-          command: |
-            echo "Starting SAST scan"
-            mkdir -p CxConsolePlugin 
-            cd CxConsolePlugin 
-            wget https://download.checkmarx.com/9.0.0/Plugins/CxConsolePlugin-2021.1.1.zip
-            apt-get install unzip
-            unzip CxConsolePlugin-2021.1.1.zip
-            export PATH=$PATH:$CI_PROJECT_DIR/CxConsolePlugin
-            pwd
-            chmod +x runCxConsole.sh
-            ls
-            sh ./runCxConsole.sh Scan -CxServer https://cxprivatecloud.checkmarx.net -TrustedCertificates -CxUser cassio -CxPassword Putaria@67 -Projectname "CxServer\SP\EMEA\LATAM\nova-8.com - 55\Damm Vulnerable dotNet Web Application" -LocationType "folder" -LocationPath "./project" -Incremental -Comment "From CircleCI" -Preset "Checkmarx Default" -LocationPathExclude "CxConsolePlugin,.idea,db,docs,scripts,test" -LocationFilesExclude ".dockerignore"
-
+      - run: |
+          wget https://download.checkmarx.com/9.3.0GA/Plugins/CxConsolePlugin-1.1.5.zip
+          mkdir CxConsolePlugin
+          unzip CxConsolePlugin-1.1.5.zip -d CxConsolePlugin
+          cd CxConsolePlugin
+          chmod +x runCxConsole.sh
+          ./runCxConsole.sh Scan -CxServer "https://sulamerica.checkmarx.net" -TrustedCertificates enable -CxToken $token -LocationPath "folder" -OsaPathExclude CxConsolePlugin -Projectname "/CxServer/Teste"  
 workflows:
-  Build-Security: 
+  sample: 
     jobs:
-      - build
+      - build-and-test
