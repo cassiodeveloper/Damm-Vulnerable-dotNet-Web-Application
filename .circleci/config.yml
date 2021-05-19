@@ -17,7 +17,7 @@ jobs:
     docker:
       - image: bash
       - image: microsoft/dotnet:latest
-      - image: openjdk:14.0.2-jdk-slim
+      - image: gradle:jdk8
     steps:
       - checkout
       - run: java --version
