@@ -15,7 +15,7 @@ jobs:
       - checkout
   checkmarx:
     docker:
-      - image: gradle:jdk8
+      - image: microsoft/dotnet:latest
     steps:
       - run:
           command: |
@@ -27,7 +27,8 @@ jobs:
             export PATH=$PATH:$CI_PROJECT_DIR/CxConsolePlugin
             chmod +x runCxConsole.sh
             ls
-            ./runCxConsole.sh Scan -CxServer https://cxprivatecloud.checkmarx.net -TrustedCertificates -CxToken 9aabd200d238011ae1735b9a2601e294ae381d611fcd46c39d30818c482e9199 -Projectname "CxServer\SP\Partners\Nova8\TesteCLIAlmir" -LocationType "folder" -LocationPath "~/Damm-Vulnerable-dotNet-Web-Application" -Incremental -Comment "From CircleCI" -Preset "Checkmarx Default" -LocationPathExclude "CxConsolePlugin,.idea,db,docs,scripts," -LocationFilesExclude ".dockerignore"
+            echo ${PROJECT_ENV_VAR}
+            ./runCxConsole.sh Scan -CxServer https://cxprivatecloud.checkmarx.net -TrustedCertificates -CxToken 9aabd200d238011ae1735b9a2601e294ae381d611fcd46c39d30818c482e9199 -Projectname "CxServer\SP\Partners\Nova8\TesteCLIAlmir" -LocationType "folder" -LocationPath "${PROJECT_ENV_VAR}" -Incremental -Comment "From CircleCI" -Preset "Checkmarx Default" -LocationPathExclude "CxConsolePlugin,.idea,db,docs,scripts,test" -LocationFilesExclude ".dockerignore"
 
 workflows:
   # Below is the definition of your workflow.
