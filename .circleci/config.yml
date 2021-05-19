@@ -16,7 +16,6 @@ jobs:
   checkmarx:
     docker:
       - image: microsoft/dotnet:latest
-      - image: gradle:jdk8
     steps:
       - run:
           command: |
