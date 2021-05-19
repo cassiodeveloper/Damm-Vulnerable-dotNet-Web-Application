@@ -19,7 +19,7 @@ jobs:
     steps:
       - run:
           name: Install unzip
-          command: sudo apt-get install unzip
+          command: apt-get install unzip
       - run:
           command: |
             echo "Starting SAST scan"
