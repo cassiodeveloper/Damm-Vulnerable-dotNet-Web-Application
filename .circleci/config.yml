@@ -4,13 +4,9 @@ jobs:
   build:  
     docker:
       - image: microsoft/dotnet:latest
-    steps:
-      - checkout
-  checkmarx:
-    docker:
-      - image: microsoft/dotnet:latest
       - image: cimg/openjdk:11.0
     steps:
+      - checkout
       - run:
           command: |
             echo "Starting SAST scan"
@@ -28,4 +24,3 @@ workflows:
   Build-Security: 
     jobs:
       - build
-      - checkmarx
