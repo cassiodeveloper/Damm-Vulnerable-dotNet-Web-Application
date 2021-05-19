@@ -28,8 +28,8 @@ jobs:
             wget https://download.checkmarx.com/9.0.0/Plugins/CxConsolePlugin-2021.1.1.zip
             unzip CxConsolePlugin-2021.1.1.zip
             export PATH=$PATH:$CI_PROJECT_DIR/CxConsolePlugin
+            pwd
             chmod +x runCxConsole.sh
-            java --version
             ls
             sh ./runCxConsole.sh Scan -CxServer https://cxprivatecloud.checkmarx.net -TrustedCertificates -CxUser cassio -CxPassword Putaria@67 -Projectname "CxServer\SP\EMEA\LATAM\nova-8.com - 55\Damm Vulnerable dotNet Web Application" -LocationType "folder" -LocationPath "./project" -Incremental -Comment "From CircleCI" -Preset "Checkmarx Default" -LocationPathExclude "CxConsolePlugin,.idea,db,docs,scripts,test" -LocationFilesExclude ".dockerignore"
 
