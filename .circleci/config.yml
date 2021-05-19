@@ -1,26 +1,16 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. 
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
 jobs:
-  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
     docker:
       - image: microsoft/dotnet:latest
     steps:
-      # Checkout the code as the first step.
       - checkout
   checkmarx:
     docker:
-      - image: bash
       - image: microsoft/dotnet:latest
-      - image: cimg/openjdk:16.0.0
-      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: gradle:jdk8
     steps:
-      - checkout
       - run:
           command: |
             echo "Starting SAST scan"
@@ -35,10 +25,6 @@ jobs:
             sh ./runCxConsole.sh Scan -CxServer https://cxprivatecloud.checkmarx.net -TrustedCertificates -CxUser cassio -CxPassword Putaria@67 -Projectname "CxServer\SP\EMEA\LATAM\nova-8.com - 55\Damm Vulnerable dotNet Web Application" -LocationType "folder" -LocationPath "./project" -Incremental -Comment "From CircleCI" -Preset "Checkmarx Default" -LocationPathExclude "CxConsolePlugin,.idea,db,docs,scripts,test" -LocationFilesExclude ".dockerignore"
 
 workflows:
-  # Below is the definition of your workflow.
-  # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
-  # CircleCI will run this workflow on every commit.
-  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   Build-Security: 
     jobs:
       - build
