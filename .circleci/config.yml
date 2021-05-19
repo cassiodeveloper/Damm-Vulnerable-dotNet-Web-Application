@@ -10,6 +10,7 @@ jobs:
     # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
     docker:
       - image: microsoft/dotnet:latest
+      - image: circleci/openjdk:9.0.4-12
     steps:
       # Checkout the code as the first step.
       - checkout
