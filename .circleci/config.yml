@@ -5,8 +5,6 @@ jobs:
     docker:
       - image: microsoft/dotnet:latest
       - image: cimg/openjdk:11.0
-      - image: bash
-      - image: circleci/openjdk:8-jdk-browsers
     steps:
       - checkout
       - run:
@@ -15,6 +13,7 @@ jobs:
             mkdir -p CxConsolePlugin 
             cd CxConsolePlugin 
             wget https://download.checkmarx.com/9.0.0/Plugins/CxConsolePlugin-2021.1.1.zip
+            apt-get install unzip
             unzip CxConsolePlugin-2021.1.1.zip
             export PATH=$PATH:$CI_PROJECT_DIR/CxConsolePlugin
             pwd
