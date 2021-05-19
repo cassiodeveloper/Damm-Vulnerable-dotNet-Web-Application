@@ -17,8 +17,7 @@ jobs:
     docker:
       - image: bash
       - image: microsoft/dotnet:latest
-      - image: cimg/openjdk:15.0
-      - image: cimg/openjdk:15.0-node
+      - image: openjdk:14.0.2-jdk-slim
     steps:
       - checkout
       - run: java --version
